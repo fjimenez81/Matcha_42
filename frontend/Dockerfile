@@ -4,6 +4,6 @@ RUN mkdir /app
 WORKDIR /app
 ADD . /app/
 
-EXPOSE 5000
+EXPOSE 3000
 
 CMD ["npm", "install"]

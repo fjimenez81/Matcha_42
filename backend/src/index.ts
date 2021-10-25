@@ -5,7 +5,7 @@ function main()
 {
     const app: ServerApp = new ServerApp()
 
-    app.listen(3000)
+    app.listen(5000)
 }
 
 main()
