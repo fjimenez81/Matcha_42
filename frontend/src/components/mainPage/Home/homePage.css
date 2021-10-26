@@ -1,0 +1,22 @@
+.container
+{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../../assets/Sakura-bloom-spring-Japan_1920x1200.jpg');
+    background-size: cover;
+    display: flex;
+    
+}
+
+h1
+{
+    color: #db47d9;
+    position: absolute;
+    left: 40%;
+    top: 30%;
+    font-family: futura;
+    font-size: 5vw;
+    box-shadow: 2px 2px 10px rgba(19, 5, 11, .45);
+    padding: 1%;
+    transform: scale(1.3);
+}
