@@ -1,5 +1,4 @@
 import { ServerApp } from "./ServerApp";
-//import { connect } from './database/connection'
 
 function main()
 {
