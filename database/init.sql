@@ -5,5 +5,7 @@ CREATE TABLE users (
     name VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
     password VARCHAR(60) NOT NULL,
+    gender VARCHAR(6) NOT NULL,
+    preference VARCHAR(6) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

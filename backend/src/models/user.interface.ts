@@ -6,5 +6,7 @@ export interface UserI
     name?: string;
     email: string;
     password: string;
+    gender?: string;
+    preference?: string;
     created_at?: Date;
 }

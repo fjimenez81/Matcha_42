@@ -13,4 +13,9 @@ export class UserService
     {
         return await axios.get('http://localhost:5000/users/findUser')
     }
+
+    async updateUser(data: any)
+    {
+        return await axios.put('http://localhost:5000/users/updateUser', {data})
+    }
 }

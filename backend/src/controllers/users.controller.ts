@@ -13,7 +13,9 @@ export const createUser = async (req: Request, res: Response) => {
         const newUser: UserI = {
             name: 'default',
             email: req.body.email,
-            password: hash
+            password: hash,
+            gender: 'null',
+            preference: 'null'
         }
         if (!(await findUserByEmail(req.body.email)))
             return res.send({message: "failed"})
@@ -41,7 +43,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 
     const userId: string = req.params.id
     const conn: Pool = connect()
-    await conn.query(`DELETE FROM users WHERE id = ${userId}`)
+    await conn.query('DELETE FROM users WHERE id=?', [userId])
     return res.json("User Deleted")
 }
 
@@ -68,12 +70,20 @@ export const findUserByEmail = async (email: string): Promise<boolean> => {
 
 export const findUser = async (req: Request, res: Response) => {
 
-    const decoded: any = jwt.decode(req.cookies['clientID'])
-    const userId: string = decoded.id as string
+    const userId: string = getUserId(req.cookies['clientID'])
     const conn: Pool = connect()
-    const getUser: any = await conn.query('SELECT * from users WHERE id = ?', [userId])
+    const getUser: any = await conn.query('SELECT * from users WHERE id=?', [userId])
     const user: UserI = getUser[0] as UserI
     return res.send(user)
+}
+
+export const updateUser = async (req: Request, res: Response) => {
+
+    const userId: string = getUserId(req.cookies['clientID'])
+    const upuser = req.body.data
+    const conn: Pool = connect()
+    const info = await conn.query('UPDATE users SET ? WHERE id=?', [upuser, userId])
+    return res.json("User Updated")
 }
 
 const getToken = async (conn: Pool): Promise<string> => {
@@ -86,4 +96,10 @@ const getToken = async (conn: Pool): Promise<string> => {
         "345345kljñkljczzxcczx",
         { expiresIn: "7200s"})
     return token
+}
+
+const getUserId = (token: string): string => {
+
+    const decoded: any = jwt.decode(token)
+    return decoded.id as string
 }
